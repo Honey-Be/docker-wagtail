@@ -1,4 +1,4 @@
-FROM honeybe/alpine-pypy:3-5.7.0
+FROM honeybe/alpine-pypy:latest
 
 # Add Edge and bleeding repos
 RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
