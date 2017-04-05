@@ -1,4 +1,4 @@
-FROM apihackers/python3
+FROM hobeybe/alpine-pypy:3-5.7.0
 
 # Add Edge and bleeding repos
 RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
@@ -6,6 +6,7 @@ RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/r
 
 # Install permanent system depdencies
 RUN apk add --update --no-cache \
+    clang \   
     libpng \
     libjpeg \
     bash \
@@ -20,11 +21,13 @@ RUN apk add --update --no-cache \
     imagemagick \
     libpq \
     libtbb@testing \
-    zlib
+    zlib \
+    ffmpeg  \
+    openexr
 
 # Define some versions
-ENV OPENCV_VERSION 3.1.0
-ENV WAGTAIL_VERSION 1.6
+ENV OPENCV_VERSION 3.2.0
+ENV WAGTAIL_VERSION 1.9
 ENV DJANGO_VERSION 1.10.0
 
 # Define compilers
@@ -38,6 +41,7 @@ ENV LIBRARY_PATH=/lib:/usr/lib
 # Temporary install build dependencies
 RUN apk add --no-cache --virtual .build-deps@testing  \
         python3-dev \
+        clang-dev \ 
         curl \
         cmake \
         pkgconf \
@@ -47,8 +51,6 @@ RUN apk add --no-cache --virtual .build-deps@testing  \
         libjpeg-turbo-dev \
         libpng-dev \
         libdc1394-dev \
-        clang \
-        clang-dev \
         tiff-dev \
         libwebp-dev \
         imagemagick-dev \
@@ -64,7 +66,7 @@ RUN apk add --no-cache --virtual .build-deps@testing  \
     && pip3 install numpy \
     # Build OpenCV
     && mkdir /opt && cd /opt \
-    && curl -OsSL https://github.com/Itseez/opencv/archive/${OPENCV_VERSION}.zip \
+    && curl -OsSL https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
     && unzip ${OPENCV_VERSION}.zip \
     && cd /opt/opencv-${OPENCV_VERSION} \
     && mkdir build && cd build \
@@ -74,9 +76,9 @@ RUN apk add --no-cache --virtual .build-deps@testing  \
         -D INSTALL_C_EXAMPLES=OFF \
     	-D INSTALL_PYTHON_EXAMPLES=OFF \
     	-D BUILD_EXAMPLES=OFF \
-        -D WITH_FFMPEG=NO \
+        -D WITH_FFMPEG=YES \
         -D WITH_IPP=NO \
-        -D WITH_OPENEXR=NO \
+        -D WITH_OPENEXR=YES \
         .. \
     && VERBOSE=1 make && make install \
     && cd && rm -fr /opt \
