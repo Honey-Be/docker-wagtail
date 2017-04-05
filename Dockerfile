@@ -40,7 +40,10 @@ RUN apk add --update --no-cache \
     ffmpeg@community  \
     ffmpeg-libs@community \
     openexr@community \
-    openexr-tools@community
+    openexr-tools@community \
+    clang-dev \ 
+    ffmpeg-dev@community \
+    openexr-dev@community
 
 # Define some versions
 ENV OPENCV_VERSION 3.2.0
@@ -58,9 +61,6 @@ ENV LIBRARY_PATH=/lib:/usr/lib
 # Temporary install build dependencies
 RUN apk add --no-cache --virtual .build-deps@testing  \
         python3-dev \
-        clang-dev \ 
-        ffmpeg-dev@community \
-        openexr-dev@community \
         curl \
         cmake \
         pkgconf \
