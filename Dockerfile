@@ -21,10 +21,10 @@ RUN apk add --update --no-cache \
     libpq \
     libtbb@testing \
     zlib \
-    ffmpeg  \
-    ffmpeg-libs \
-    openexr \
-    openexr-tools
+    ffmpeg@edge  \
+    ffmpeg-libs@edge \
+    openexr@edge \
+    openexr-tools@edge
 
 # Define some versions
 ENV OPENCV_VERSION 3.2.0
