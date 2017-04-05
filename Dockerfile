@@ -1,8 +1,8 @@
 FROM honeybe/alpine-pypy:latest
 
 # Add Edge and bleeding repos
-# RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
-#     && echo -e '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
+    && echo -e '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
 
 # Install permanent system depdencies
 RUN apk add --update --no-cache \
@@ -22,7 +22,9 @@ RUN apk add --update --no-cache \
     libtbb@testing \
     zlib \
     ffmpeg  \
-    openexr
+    ffmpeg-libs \
+    openexr \
+    openexr-tools
 
 # Define some versions
 ENV OPENCV_VERSION 3.2.0
@@ -41,6 +43,8 @@ ENV LIBRARY_PATH=/lib:/usr/lib
 RUN apk add --no-cache --virtual .build-deps@testing  \
         python3-dev \
         clang-dev \ 
+        ffmpeg-dev \
+        openexr-dev \
         curl \
         cmake \
         pkgconf \
