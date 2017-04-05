@@ -6,7 +6,6 @@ RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/r
 
 # Install permanent system depdencies
 RUN apk add --update --no-cache \
-    clang \   
     libpng \
     libjpeg \
     bash \
