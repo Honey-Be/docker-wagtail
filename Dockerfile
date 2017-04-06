@@ -2,6 +2,9 @@ FROM honeybe/alpine-pypy:latest
 
 RUN echo "ipv6" >> /etc/modules
 
+ENV CC=clang
+ENV CXX=clang++
+
 # Add Edge and bleeding repos
 RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
     && echo -e '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
