@@ -19,7 +19,8 @@ RUN apk add --update --no-cache \
     yaml \
     gettext \
     gsl \
-    libjasper \
+    jasper \
+    jasper-libs \
     tiff \
     libwebp \
     libavc1394 \
@@ -52,6 +53,7 @@ ENV LIBRARY_PATH=/lib:/usr/lib
 # Temporary install build dependencies
 RUN apk add --no-cache --virtual .build-deps  \
         python3-dev \
+        jasper-dev \
         curl \
         cmake \
         pkgconf \
