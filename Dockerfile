@@ -26,7 +26,7 @@ RUN apk add --update --no-cache \
     libdc1394 \
     imagemagick \
     libpq \
-    libtbb@testing \
+    libtbb \
     zlib \
     ffmpeg \
     ffmpeg-libs \
@@ -50,7 +50,7 @@ ENV LIBRARY_PATH=/lib:/usr/lib
 
 # Compile and install OpenCV for Python 3 and wagtail
 # Temporary install build dependencies
-RUN apk add --no-cache --virtual .build-deps@testing  \
+RUN apk add --no-cache --virtual .build-deps  \
         python3-dev \
         curl \
         cmake \
