@@ -6,9 +6,7 @@ ENV CC=clang
 ENV CXX=clang++
 
 # Add Edge and bleeding repos
-# RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
-#     && echo -e '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-#     && echo -e '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
+RUN echo -e '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
 
 
 # Install permanent system depdencies
@@ -27,7 +25,7 @@ RUN apk add --update --no-cache \
     libdc1394 \
     imagemagick \
     libpq \
-    libtbb \
+    libtbb@testing \
     zlib \
     ffmpeg \
     ffmpeg-libs \
@@ -68,8 +66,8 @@ RUN apk add --no-cache --virtual .build-deps  \
         imagemagick-dev \
         zlib-dev \
         postgresql-dev \
-        libtbb \
-        libtbb-dev \
+        libtbb@testing \
+        libtbb-dev@testing \
         linux-headers \
     # Fix numpy compilation
     && ln -s /usr/include/locale.h /usr/include/xlocale.h \
