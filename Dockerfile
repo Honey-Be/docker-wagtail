@@ -6,21 +6,9 @@ ENV CC=clang
 ENV CXX=clang++
 
 # Add Edge and bleeding repos
-RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
-    && echo -e '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-    && echo -e '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
-    # && echo -e '@edge http://dl-2.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
-    # && echo -e '@testing http://dl-2.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-    # && echo -e '@community http://dl-2.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
-    # && echo -e '@edge http://dl-3.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
-    # && echo -e '@testing http://dl-3.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-    # && echo -e '@community http://dl-3.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
-    # && echo -e '@edge http://dl-4.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
-    # && echo -e '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-    # && echo -e '@community http://dl-4.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
-    # && echo -e '@edge http://dl-5.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
-    # && echo -e '@testing http://dl-5.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-    # && echo -e '@community http://dl-5.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
+# RUN echo -e '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
+#     && echo -e '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
+#     && echo -e '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
 
 
 # Install permanent system depdencies
@@ -40,13 +28,13 @@ RUN apk add --update --no-cache \
     libpq \
     libtbb@testing \
     zlib \
-    ffmpeg@community  \
-    ffmpeg-libs@community \
-    openexr@community \
-    openexr-tools@community \
+    ffmpeg \
+    ffmpeg-libs \
+    openexr \
+    openexr-tools \
     clang-dev \ 
-    ffmpeg-dev@community \
-    openexr-dev@community
+    ffmpeg-dev \
+    openexr-dev
 
 # Define some versions
 ENV OPENCV_VERSION 3.2.0
@@ -78,8 +66,8 @@ RUN apk add --no-cache --virtual .build-deps@testing  \
         imagemagick-dev \
         zlib-dev \
         postgresql-dev \
-        libtbb@testing \
-        libtbb-dev@testing \
+        libtbb \
+        libtbb-dev \
         linux-headers \
     # Fix numpy compilation
     && ln -s /usr/include/locale.h /usr/include/xlocale.h \
